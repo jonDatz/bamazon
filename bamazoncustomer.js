@@ -18,9 +18,24 @@ const connection = mysql.createConnection({
 connection.connect(function(err) {
   if (err) throw err;
   console.log("connected as id " + connection.threadId + "\n");
-    start(); 
+    initRead();
+
 //   createProduct();
 });
+
+
+let initRead = function () {
+
+  console.log("\nViewing all products..\n");
+  connection.query("SELECT * FROM products", function (err, res) {
+    if (err) throw err;
+    // Log all items
+    console.log(res);
+    
+    start(); 
+  })
+  
+}
 
 // function which prompts the user for what action they should take
 function start() {
